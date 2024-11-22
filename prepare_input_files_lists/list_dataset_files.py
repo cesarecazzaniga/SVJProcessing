@@ -77,10 +77,14 @@ def __list_files(dataset_info, nano_aod):
                     files_list_ = sorted(files_list_, key=lambda x: int(x.split("/")[-1].split("-")[6].replace(".root","")))
                 elif "PFNanoAOD_SVJtaus_" in files_list[0].split("/")[-1]:
                     files_list_ = sorted(files_list_, key=lambda x: int(x.split("/")[-1].split("-")[6].replace(".root","")))
-                elif "PFNANOAOD" in files_list[0].split("/")[-1]:
+                elif "PFNANOAOD" in files_list[0].split("/")[-1] and files_list[0].split("/")[-1].split("-")[2].replace(".root","").isdigit():
                     files_list_ = sorted(files_list_, key=lambda x: int(x.split("/")[-1].split("-")[2].replace(".root","")))
-                elif "PFNanoAOD" in files_list[0].split("/")[-1]:
-                    files_list_ = sorted(files_list_, key=lambda x: int(x.split("/")[-1].split("-")[2].replace(".root","")))
+                elif "PFNANOAOD" in files_list[0].split("/")[-1] and files_list[0].split("/")[-1].split("_")[4].split("-")[1].replace(".root","").isdigit():
+                    files_list_ = sorted(files_list_, key=lambda x: int(x.split("/")[-1].split("_")[4].split("-")[1].replace(".root","")))
+                elif "PFNANOAOD" in files_list[0].split("/")[-1] and files_list[0].split("/")[-1].split("_")[3].split("-")[1].replace(".root","").isdigit():
+                    files_list_ = sorted(files_list_, key=lambda x: int(x.split("/")[-1].split("_")[3].split("-")[1].replace(".root","")))
+                elif ("PFNanoAOD" in files_list[0].split("/")[-1]):
+                    files_list_ = sorted(files_list_, key=lambda x: int(x.split("/")[-1].split("-")[2].replace(".root",""))) 
                 else:
                     files_list_ = sorted(files_list_, key=lambda x: int(x.split("/")[-1].split("_")[0]))
             else:
