@@ -7,8 +7,8 @@ CORES=2
 CHUNK_SIZE=1000
 N_WORKERS=150
 #EXECUTOR=dask/lpccondor    # HTCondor at LPC
-#EXECUTOR=dask/slurm         # slurm at PSI
-EXECUTOR=futures        # run interactively
+EXECUTOR=dask/slurm         # slurm at PSI
+#EXECUTOR=futures        # run interactively
 FORCE_RECREATE=0   # 1 to recreate output file if it exists, 0 else
 FIRST_FILE=0
 LAST_FILE=-1  # Use -1 to skim all input files
@@ -114,7 +114,7 @@ make_skims() {
                     else
                         weight_variation_flag=""
                     fi
-                    python skim.py -i ${input_files} -o ${output_file_tmp} -p ${module} -pd ${dataset_name} -y ${year} -e ${EXECUTOR} -n ${N_WORKERS} -c ${CHUNK_SIZE} --memory ${MEMORY} --cores ${CORES} -pn_tagger ${variation_flag} ${weight_variation_flag} -xsec ${xsec} -nano -mc 
+                    python skim.py -i ${input_files} -o ${output_file_tmp} -p ${module} -pd ${dataset_name} -y ${year} -e ${EXECUTOR} -n ${N_WORKERS} -c ${CHUNK_SIZE} --memory ${MEMORY} --cores ${CORES} --walltime ${TIME} --queue ${PARTITION} -pn_tagger ${variation_flag} ${weight_variation_flag} -xsec ${xsec} -nano -mc 
                     xrdcp -f ${output_file_tmp} ${output_file}
                     echo ${output_file} has been saved.
                     rm ${output_file_tmp}
